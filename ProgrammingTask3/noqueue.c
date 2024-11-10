@@ -1,3 +1,10 @@
+// Group Members:
+// Clarence Ignacio
+// Gabriel Valderama
+// Jan Kevin Gerona
+// Karl Joseph Logdat
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -95,7 +102,7 @@ int main() {
         scanf(" %d", &interval);
 
         // validate input
-        if (start < 1 || start > 13 || interval < 1) {
+        if (start < 1 || start > 13 || interval < 1 || interval > 100) {
             printf("\nInvalid input.\n\n");
             continue;
         }
