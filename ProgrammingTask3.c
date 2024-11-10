@@ -1,54 +1,117 @@
+// Group Members:
+// Clarence Ignacio
+// Gabriel Valderama
+// Jan Kevin Gerona
+// Karl Joseph Logdat
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SIZE 13
+// circular linked list implementation
+typedef struct Node {
+    int value;
+    struct Node* next;
+} Node;
 
-int queue[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-int front = 0;
-int selected[5] = {0};   // Store the dequeued numbers
-int dequeued[SIZE] = {0}; // Track dequeued numbers (1 = dequeued, 0 = not dequeued)
+// when creating a node, point to itself initially instead of NULL
+Node* NewNode(int key) {
+    Node* node = (Node*) malloc(sizeof(Node));
+    node->value = key;
+    node->next = node;
 
-// Function to perform dequeue operation and mark the item as dequeued
-int dequeue() {
-    int data = queue[front];
-    dequeued[front] = 1; // Mark this position as dequeued
-    printf("Deleted %d\n", data);
-    return data;
+    return node;
+}
+
+// this function assumes that head EXISTS and is not a nullptr
+void Push(Node* head, Node* new) {
+    Node* temp = head;
+    while (temp->next != head) {
+        temp = temp->next;
+    }
+
+    temp->next = new;
+    new->next = head;
+}
+
+// problem related functions
+// create adviser circular list using loops
+Node* CreateAdviserCircle(int total_count) {
+    Node* advisers = NewNode(1);
+    for (int i = 2; i <= total_count; i++) {
+        Push(advisers, NewNode(i));
+    }
+
+    return advisers;
+}
+
+void SelectAdvisers(Node* adviser_list_head, int start, int interval) {
+    Node* temp = adviser_list_head;
+    Node* prev = NULL;
+
+    // move temporary to start
+    while (temp->value != start) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    printf("\nChosen Advisers     : ");
+
+    // track the number of advisers selected (MAX 5)
+    int adviser_count = 0;
+    while (adviser_count < 5) {
+        for (int i = 1; i < interval; i++) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        printf("%d", temp->value);
+        adviser_count++;
+        if (adviser_count < 5) printf(", "); // formatting
+
+        // remove node by linking prev to temp's next
+        prev->next = temp->next; 
+        free(temp);
+        // this is the reason why our for loop starts at 1
+        temp = prev->next;
+    }
+    printf("\n\n");
+
+    // free remaining advisers after use
+    // if we dont free, we leave 8 pointers per loop
+    Node* current = temp;
+    Node* next;
+    do {
+        next = current->next;
+        free(current);
+        current = next;
+    } while (current != temp);
 }
 
 int main() {
-    int start, interval, target = 0;
+    int start, interval;
+    const int TOTAL_ADVISER_COUNT = 13;
 
-    // Input start and interval
-    printf("Enter the start   : ");
-    scanf("%d", &start);
-    printf("Enter the interval: ");
-    scanf("%d", &interval);
+    while(1) {
+        printf("Start     : ");
+        scanf(" %d", &start);
+        // terminate program if user input is 0
+        if (start == 0) break;
 
-    // Adjust starting point (0-based index)
-    front = start - 2;
+        printf("Interval  : ");
+        scanf(" %d", &interval);
 
-    // Loop to select 5 elements
-    while (target < 5) {
-        int steps = 0;
-        
-        // Move by interval, counting only non-dequeued items
-        while (steps < interval) {
-            front = (front + 1) % SIZE;
-            if (!dequeued[front]) { // Count only if not dequeued
-                steps++;
-            }
+        // validate input
+        if (start < 1 || start > 13 || interval < 1 || interval > 100) {
+            printf("\nInvalid input.\n\n");
+            continue;
         }
 
-        // Dequeue the element and add it to the selected array
-        selected[target] = dequeue();
-        target++;
-    }
+        // create new adviser circle every loop 
+        Node* advisers = CreateAdviserCircle(TOTAL_ADVISER_COUNT);
 
-    // Print the selected elements
-    printf("Selected elements:\n");
-    for (int i = 0; i < 5; i++) {
-        printf("%d ", selected[i]);
+        // actual program logic found in function
+        SelectAdvisers(advisers, start, interval);
     }
 
     return 0;
