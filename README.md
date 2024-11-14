@@ -9,7 +9,8 @@
 ### Command-line Syncing
 ### TL;DR
 ```
-git remote add upstream https://github.com/blckzr/Group-Programming-Task.git # execute once, not every sync
+# execute once, not every sync
+git remote add upstream https://github.com/blckzr/Group-Programming-Task.git 
 
 # execute these everytime you want to sync
 git fetch upstream
