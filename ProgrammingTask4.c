@@ -85,16 +85,24 @@ int main(){
     // TODO:
     // pa handle nalang kung pano iinput to ng user nyahaha
     // also also formatting ng output
-    AddNode(&root, 'A', 'B', 'E');
-    AddNode(&root, 'B', 'C', 'n');
-    AddNode(&root, 'C', 'n', 'D');
-    AddNode(&root, 'E', 'F', 'H');
-    AddNode(&root, 'F', 'n', 'G');
-    AddNode(&root, 'H', 'I', 'J');
+    // AddNode(&root, 'A', 'B', 'E');
+    // AddNode(&root, 'B', 'C', 'n');
+    // AddNode(&root, 'C', 'n', 'D');
+    // AddNode(&root, 'E', 'F', 'H');
+    // AddNode(&root, 'F', 'n', 'G');
+    // AddNode(&root, 'H', 'I', 'J');
 
-    InOrder(root);
-    printf("\n");
+    for (int i = 0; i < 6; i++) {
+	    char rt, l, r;
+	    scanf(" (%c%*c,%c%*c,%c%*c) ", &rt, &l, &r);
+	    AddNode(&root, rt, l, r);
+    }
+
+    printf("Root: %c\n", root->value);
+
     PreOrder(root);
+    printf("\n");
+    InOrder(root);
     printf("\n");
     PostOrder(root);
     printf("\n");
