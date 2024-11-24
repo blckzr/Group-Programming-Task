@@ -4,16 +4,19 @@
 // Jan Kevin Gerona
 // Karl Joseph Logdat
 
+// list of library 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// Declare Node characteristics
 typedef struct Node {
     char value;
     struct Node* left;
     struct Node* right;
 } Node;
 
+// Create a new Node
 Node* NewNode(char value) {
     Node* node = (Node*) malloc(sizeof(Node));
     node->value = value;
@@ -23,6 +26,7 @@ Node* NewNode(char value) {
     return node;
 }
 
+// Searching algorithm for Node
 Node* SearchNode(Node* root, char value) {
     if (root == NULL) return NULL;
     if (root->value == value) return root;
@@ -33,9 +37,8 @@ Node* SearchNode(Node* root, char value) {
     return SearchNode(root->right, value);
 }
 
-// double pointer because c pointer bs
 // essentially, use double pointer to modify the passed pointer
-// READ:
+// Reference:
 // https://stackoverflow.com/questions/5580761/why-use-double-indirection-or-why-use-pointers-to-pointers
 // https://www.quora.com/Why-there-is-a-need-of-double-pointer
 void AddNode(Node** root, char rootValue, char leftValue, char rightValue) {
@@ -51,6 +54,7 @@ void AddNode(Node** root, char rootValue, char leftValue, char rightValue) {
     if (rightValue != 'n') rootNode->right = NewNode(rightValue);
 }
 
+// InOrder Traversal: Left, Root, Right
 void InOrder(Node* node) {
     if (node == NULL)
         return;
@@ -60,6 +64,7 @@ void InOrder(Node* node) {
     InOrder(node->right);
 }
 
+// PreOrder Traversal: Root, Left, Right
 void PreOrder(Node* node) {
     if (node == NULL)
         return;
@@ -69,6 +74,7 @@ void PreOrder(Node* node) {
     PreOrder(node->right);
 }
 
+// PostOrder Traversal: Left, Right, Root
 void PostOrder(Node* node) {
     if (node == NULL)
         return;
@@ -106,6 +112,7 @@ void printPreOrder(Node *root) {
     printPreOrder(root->right);
 }
 
+// Get tree data from input and add new Node
 void getInput(Node** root) {
     char line[100]; // string buffer
     char node, left[10], right[10];
@@ -154,6 +161,7 @@ int main(){
 
     printf("\nRoot: %c\n", root->value);
 
+    // Printing Tree Traversal Techniques
     printf("\nPreorder Traversal: ");
     PreOrder(root);
     printf("\n");
