@@ -10,40 +10,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int search(int* arr, int n, int x) {
+int search(char* arr, int n, char x) {
     for (int i = 0; i < n; i++)
         if (arr[i] == x)
             return i;
     return -1;
 }
 
-void printPostOrder(int* in, int* pre, int inStart, int inEnd, int preStart, int n) {
+void printPostOrder(char* in, char* pre, int inStart, int inEnd, int* preIndex, int n) {
     // Base case
     if (inStart > inEnd)
         return;
 
+    // Current root is at *preIndex in the preorder array
+    char root = pre[*preIndex];
+    (*preIndex)++;
+
     // Find the root index in the inorder array
-    int rootIndex = search(in, n, pre[preStart]);
+    int rootIndex = search(in, n, root);
 
-    // If left subtree is not empty, print left subtree
-    if (rootIndex > inStart) {
-        printPostOrder(in, pre, inStart, rootIndex - 1, preStart + 1, n);
-    }
+    // Recur for the left subtree
+    printPostOrder(in, pre, inStart, rootIndex - 1, preIndex, n);
 
-    // If right subtree is not empty, print right subtree
-    if (rootIndex < inEnd) {
-        printPostOrder(in, pre, rootIndex + 1, inEnd, preStart + rootIndex - inStart + 1, n);
-    }
+    // Recur for the right subtree
+    printPostOrder(in, pre, rootIndex + 1, inEnd, preIndex, n);
 
-    // Print root
-    printf("%d ", pre[preStart]);
+    // Print the root (postorder)
+    printf("%c ", root);
 }
 
 int main() {
-    int in[] = {4, 2, 5, 1, 3, 6};
-    int pre[] = {1, 2, 4, 5, 3, 6};
+    char pre[] = {'D', 'B', 'A', 'C', 'E', 'F', 'G'};
+    char in[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
     int n = sizeof(in) / sizeof(in[0]);
+    int preIndex = 0;
 
-    printPostOrder(in, pre, 0, n - 1, 0, n);
+    printPostOrder(in, pre, 0, n - 1, &preIndex, n);
     return 0;
 }
