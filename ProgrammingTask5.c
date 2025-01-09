@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void getFile(){
+    // file crud here
+}
+
 int search(char* arr, int n, char x) {
     for (int i = 0; i < n; i++)
         if (arr[i] == x)
@@ -40,7 +44,8 @@ void printPostOrder(char* in, char* pre, int inStart, int inEnd, int* preIndex, 
 }
 
 int main() {
-    char pre[] = {'D', 'B', 'A', 'C', 'E', 'F', 'G'};
+    // TODO: Input should be from text file
+    char pre[] = {'D', 'B', 'A', 'C', 'E', 'G', 'F'};
     char in[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
     int n = sizeof(in) / sizeof(in[0]);
     int preIndex = 0;
