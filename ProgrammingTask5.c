@@ -6,6 +6,7 @@
 
 // REFERENCE
 // - https://www.geeksforgeeks.org/print-postorder-from-given-inorder-and-preorder-traversals/
+// - https://stackoverflow.com/questions/5850000/how-to-split-array-into-two-arrays-in-c
 
 #include <stdio.h>
 #include <stdlib.h>
