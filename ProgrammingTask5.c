@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Remove all whitespaces in string
 void cleanString(char *string){
     int length = strlen(string);
 
