@@ -11,13 +11,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Remove all whitespaces in string
+// Combined function to remove whitespaces and newline characters
 void cleanString(char *string){
     int length = strlen(string);
-
     int j = 0;
+
     for (int i = 0; i < length; i++){
-        if (string[i] != ' '){
+        if (string[i] != ' ' && string[i] != '\n'){
             string[j] = string[i];
             j++;
         }
@@ -62,13 +62,6 @@ int countElements(char *string) {
     return count;
 }
 
-void removeNewline(char *string) {
-    int length = strlen(string);
-    if (string[length - 1] == '\n') {
-        string[length - 1] = '\0';
-    }
-}
-
 void splitAndPrint(char *line){
     char pre[50], in[50];
     int count = countElements(line);
@@ -97,7 +90,6 @@ void readFile() {
 
     // Reads line and split into two array for pre-order and in-order
     while (fgets(currentLine, sizeof(currentLine), file)) {
-        removeNewline(currentLine);
         cleanString(currentLine);
         splitAndPrint(currentLine);
     }
