@@ -1,3 +1,9 @@
+// Group Members:
+// Clarence Ignacio
+// Gabriel Valderama 
+// Jan Kevin Gerona
+// Karl Joseph Logdat
+
 #include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>

@@ -1,3 +1,9 @@
+// Group Members:
+// Clarence Ignacio
+// Gabriel Valderama 
+// Jan Kevin Gerona
+// Karl Joseph Logdat
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

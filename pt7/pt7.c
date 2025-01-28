@@ -1,3 +1,9 @@
+// Group Members:
+// Clarence Ignacio
+// Gabriel Valderama 
+// Jan Kevin Gerona
+// Karl Joseph Logdat
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -56,8 +62,6 @@ int get_deg(Graph *g, int node) {
 }
 
 /*
- * reallocation is hard so deal with this shit idk
- *
  * using @get_deg(), create new array of bool values,
  * representing nodes and mark as true if node degree
  * is equal to @deg parameter.
